@@ -311,6 +311,7 @@ await call.blockRunningUntilNextRequest();
 ```
 
 כאשר `type` הוא סוג הודעה מתוך הטבלה שלהלן, ו`data` הוא המידע עצמו - `string`,<br>
+
 **סוגי הודעות נתמכים:**
 
 <div dir="rtl" text-align="right">
