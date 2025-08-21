@@ -311,11 +311,6 @@ await call.blockRunningUntilNextRequest();
 ```
 
 כאשר `type` הוא סוג הודעה מתוך הטבלה שלהלן, ו`data` הוא המידע עצמו - `string`,<br>
-מלבד כאשר ה`type` הוא `zmanim`/`music_on_hold`, שאז ה`data` יהיה אובייקט  - מפורט מתחת לטבלה:
-
-- [zmanim](#מבנה-הdata-בzmanim)
-- [music_on_hold](#מבנה-הdata-ב-music_on_hold)
-
 **סוגי הודעות נתמכים:**
 
 <div dir="rtl" text-align="right">
@@ -335,17 +330,6 @@ await call.blockRunningUntilNextRequest();
 ```js
 call.id_list_message(messagesWidthInvalidChars, { removeInvalidChars: true });
 ```
-
-### מבנה הdata ב-**music_on_hold**
-
-```js
-{
-    musicName: string,
-    maxSec: number // optional
-};
-```
-
-[כאן](https://f2.freeivr.co.il/topic/44/%D7%9E%D7%95%D7%96%D7%99%D7%A7%D7%94-%D7%91%D7%94%D7%9E%D7%AA%D7%A0%D7%94) סוגי מוזיקה זמינים והוראות ליצירת חדשה.
 
 # ברירות מחדל
 
