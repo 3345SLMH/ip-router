@@ -324,103 +324,16 @@ await call.blockRunningUntilNextRequest();
 | ---------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `text`           | הקראת טקסט                                                                             | `דוגמה לטקסט דוגמה`                                                    | שים לב ל[אזהרה מתחת לטבלה](#תווים-לא-חוקיים-בהקראת-טקסט) לגבי תווים שלא ניתן להקריא                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | `file`           | השמעת קובץ אודיו                                                                       | `/1/002`, ניתן לכתוב רק את שם הקובץ `002` אם הקובץ נמצא בתקייה הנוכחית | אין לכתוב סיומת קובץ. |
-| `speech`         | הקראה אוטומטית של קובץ TTS                                                             | נתיב לקובץ TTS או שם קובץ TTS בתקיה הנוכחית                            | ללא הסיומת                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | `digits`         | השמעת ספרות                                                                            | `105` - ישמיע "אחת אפס חמש"                                            | שימושי בעיקר להקראת מספר טלפון                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | `number`         | השמעת מספר                                                                             | `105` - ישמיע "מאה וחמש"                                               | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `alpha`          | השמעת אותיות באנגלית                                                                   | `abc`, ישמיע "איי, בי, סי"                                             | לא תומך בעברית                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `zmanim`         | השמעת שעה                                                                              | אובייקט. פירוט בנפרד 👇                                                 | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `system_message` | השמעת הודעת מערכת                                                                      | `M1005` או `1005`                                                      | [רשימת הודעות המערכת](https://f2.freeivr.co.il/post/3)                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | `music_on_hold`  | השמעת מוזיקה בהמתנה                                                                    | `{ musicName: 'ztomao', maxSec: 10 }`                                  | הפרמור maxSec רשות. ראה [כאן](https://f2.freeivr.co.il/topic/44/%D7%9E%D7%95%D7%96%D7%99%D7%A7%D7%94-%D7%91%D7%94%D7%9E%D7%AA%D7%A0%D7%94) סוגי מוזיקה זמינים והוראות ליצירת חדש.                                                                                                                                                                                                                                                                                                                                    |
-| `dateH`           | השמעת תאריך עברי                                                                       | פורמט `DD/MM/YYYY` - 28/07/2022                                        | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `date`          | השמעת תאריך לועזי                                                                      | פורמט תאריך לועזי `DD/MM/YYYY`, ישמיע את התאריך העברי המתאים           | -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `go_to_folder`   | נתיב יחסי לשלוחה הנוכחית או לשלוחה הראשית, ראה [כאן](https://f2.freeivr.co.il/post/58) | העברת השיחה לשלוחה אחרת                                                | לא מומלץ, עדיף להשתמש ב [`call.go_to_folder`](#go_to_folderpath). לא ניתן לשרשר הודעות נוספות לאחר סוג זה.                                                                                                                                                                                                                                                                                                                                                                                                           |
 </div>
-
-### תווים לא חוקיים בהקראת טקסט
-
-⚠️ שימו לב! ⚠️
-
-לא ניתן להחזיר לאיי פי את התוים:
-
-נקודה,מקף,גרש,גרשיים,&
-
-העברת אחד מהתוים הנ"ל יגרום לזריקת שגיאה, אלא אם כן נאפשר הסרת תווים לא חוקיים שקטה:
-
-**כאשר מעבירים טקסט להקראה (`'type: 'text`) ניתן להגדיר הסרה של תווים לא חוקיים**, כלומר שבמקום לזרוק שגיאה הם פשוט יוסרו מהתשובה שתוחזר לאיי פי.
-
-ההגדרה היא `removeInvalidChars`, אותה ניתן להגדיר בשתי רמות, ברמת הודעה בודדת, או ברמת כל ה`read`/`id_list_message`.
-
-דוגמאות:
-
-- ברמת ההודעה המסוימת - העברת הפרמטר `removeInvalidChars` באובייקט ההודעה:
-
-```js
-{
-  type: "text",
-  data: "טקסט. בעייתי.",
-  removeInvalidChars: true
-}
-```
-
-- ברמת כל ה`read`/`id_list_message` - העברת הפרמטר `removeInvalidChars` באובייקט האפשרויות.
-
-דוגמה ל`read`:
-
-```js
-const resp = await call.read(messagesWidthInvalidChars, 'tap', { removeInvalidChars: true });
-```
 
 דוגמה ל`id_list_message`:
 
 ```js
 call.id_list_message(messagesWidthInvalidChars, { removeInvalidChars: true });
-```
-
-### מבנה הdata ב`zmanim`
-
-```js
-{
-    time: string, // optional, default: "T" (current time)
-    zone: string, // optional, default: "IL/Jerusalem",
-    difference: string // optional, default: 0
-};
-```
-
-#### הערך `time`
-
-סוג הזמן שרוצים להשמיע.
-
-ברירת מחדל: "`T`" = השעה הנוכחית.
-השמעת שעה - `THH:MM`,
-או זמן הלכתי - ניתן לראות [כאן](https://f2.freeivr.co.il/post/82875) את רשימת הזמנים שניתן לחשב מהם זמן.
-
-#### הערך `zone`
-
-אזור הזמן שעבורו יש לחשב את הזמנים.
-
-ברירת מחדל: `IL/Jerusalem`.
-
-ניתן לראות [כאן](https://f2.freeivr.co.il/post/82868) את רשימת אזורי הזמן הקיימים במערכת.
-
-#### הערך `difference`
-
-ערך זה משמש להוספה/הסרה מלאכותית של זמן על הזמן שמשמיעים.
-
-באם לא יועבר פרמטר זה, יושמע הזמן ללא שינוי.
-
-הערך **`difference`** מכיל קודם את סוג הפעולה - פלוס (+) להוספת זמן, או מינוס (-) להפחתת זמן, ואז את הזמן על פי הצורה הבאה: Y - שנה M - חודש D - יום H - שעה m - דקה S - שניה s - אלפית שניה למשל, עבור 20 דקות אחורה יש להגדיר `m20-`, עבור 3 שעות קדימה יש לרשום `H3+`. עבור יומיים אחורה יש לרשום `D1-`.
-
-לדוגמה, עבור השמעת זמן שקיעת החמה מחר בעיר בני ברק:
-
-```js
-const messages = [{
-    type: 'zmanim',
-    data: {
-        time: 'sunset',
-        zone: 'IL/Bney_Brak',
-        difference: '+1D'
-    }
-}];
 ```
 
 ### מבנה הdata ב-**music_on_hold**
