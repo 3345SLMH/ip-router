@@ -18,7 +18,7 @@ body:
               Please provide the version of the package you are using.
               Use the following command to get this:
               ```bash
-              node -v && npm list yemot-router2 express
+              node -v && npm list ip-router express
               ```
           render:
               rows: 4

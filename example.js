@@ -1,10 +1,10 @@
 import express from 'express';
-import { YemotRouter } from './index.js';
+import { ipRouter } from './index.js';
 import { fileURLToPath } from 'url';
 import process from 'process';
 export const app = express();
 
-export const router = YemotRouter({
+export const router = ipRouter({
     printLog: true,
     uncaughtErrorHandler: (error, call) => {
         console.log(`Uncaught error in ${call.req.path} from ${call.phone}. error stack: ${error.stack}`);
@@ -69,6 +69,6 @@ const port = 3000;
 const isMain = process.argv[1] === fileURLToPath(import.meta.url);
 if (isMain) {
     app.listen(port, () => {
-        console.log(`example yemot-router2 running on port ${port}`);
+        console.log(`example ip-router running on port ${port}`);
     });
 }

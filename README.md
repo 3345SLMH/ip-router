@@ -1,4 +1,4 @@
-# yemot-router2
+# ip-router
 
 ספריה שמאפשרת לתכנת מערכות טלפוניות בקלות באמצעות [מודול API](https://docs.google.com/document/d/17tWXNijffAYPC-641MPSGPAAOHE1y7cD9FCnMxm09hA/edit) של חברת 'איי פי תקשורת טלפונית'.
 
@@ -14,7 +14,7 @@
 # התקנה
 
 ```bash
-npm install yemot-router2
+npm install ip-router
 ```
 
 # יומן שינויים/הוראות שדרוג
@@ -31,8 +31,8 @@ npm install yemot-router2
 הספריה עובדת על ידי חיקוי של Express Router, כך שאופן השימוש הוא די דומה. דוגמה:
 
 ```js
-import { YemotRouter } from 'yemot-router2';
-const router = YemotRouter();
+import { ipRouter } from 'ip-router';
+const router = ipRouter();
 
 router.get('/', async (call) => {
     return call.id_list_message([{
@@ -463,7 +463,7 @@ const messages = [{
 דוגמה:
 
 ```js
-const router = YemotRouter({
+const router = ipRouter({
     printLog: true,
     defaults: {
         removeInvalidChars: true,
@@ -526,13 +526,13 @@ router.get('/', async (call) => {
 
 בשימוש בראוטר עם אקספרס -
 ```ts
-const router = YemotRouter()
+const router = ipRouter()
 app.use(router)
 ```
 תוצג שגיאת טייפ. הפיתרון כרגע:
 ```ts
 const { Router } = require('express')
-const router = YemotRouter()
+const router = ipRouter()
 app.use(router.asExpressRouter)
 ```
 
@@ -582,7 +582,7 @@ async function runBigJob(call) {
 כדי להריץ קוד לאחר החזרת התשובה, יש לתפוס את השגיאה שנזרקת (במקרה שהיא שגיאת `ExitError` פנימית כנ"ל):
 
 ```js
-import { ExitError } from 'yemot-router2';
+import { ExitError } from 'ip-router';
 async function runBigJob (call) {
     try {
         call.id_list_message([{
@@ -603,7 +603,7 @@ async function runBigJob (call) {
 עם זאת, באם הקוד הנוסף המורץ אמור לקחת זמן, מומלץ לנקות ידנית באופן מיידי (מייד לאחר החזרת התשובה ב`id_list_message`) את השיחה מהactiveCalls - אחרת לא יהיה ניתן להיכנס לשלוחה עד לסיום ביצוע הפעולה הכבדה:
 
 ```js
-const router = YemotRouter({ printLog: true });
+const router = ipRouter({ printLog: true });
 router.get('/', async (call) => {
     try {
         call.id_list_message([{

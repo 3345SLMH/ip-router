@@ -1,12 +1,12 @@
 import { describe, expect } from '@jest/globals';
 import { CallSimulator } from './utils.js';
 import express from 'express';
-import { YemotRouter } from '../index.js';
+import { ipRouter } from '../index.js';
 import request from 'supertest';
 
 describe('test read defaults and options', () => {
     const randomPort = Math.floor(Math.random() * 10000) + 10000;
-    const router = YemotRouter({ printLog: true });
+    const router = ipRouter({ printLog: true });
     let server;
 
     beforeAll(async () => {

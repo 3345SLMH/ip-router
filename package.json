@@ -1,5 +1,5 @@
 {
-  "name": "yemot-router2",
+  "name": "ip-router",
   "version": "6.2.0",
   "description": "",
   "exports": {
@@ -16,9 +16,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ShlomoCode/yemot-router2.git"
+    "url": "git+https://github.com/3345SLMH/ip-router.git"
   },
-  "author": "musicode1, ShlomoCode",
+  "author": "musicode1, 3345SLMH",
   "license": "MIT",
   "dependencies": {
     "@rollup/plugin-node-resolve": "^16.0.1",
